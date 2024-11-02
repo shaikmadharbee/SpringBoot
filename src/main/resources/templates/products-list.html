@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Product List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5" th:fragment="content">
+    <h1>Product List</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Brand</th>
+            <th>Discounted Price</th>
+            <th>Description</th>
+            <th>Image</th>
+            <th>Category</th>
+            <th>Created At</th>
+            <th>Created By</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product : ${products}">
+            <td th:text="${product.proId}"></td>
+            <td th:text="${product.proName}"></td>
+            <td th:text="${product.proPrice}"></td>
+            <td th:text="${product.proBrand}"></td>
+            <td th:text="${product.discPrice}"></td>
+   
+            
+            <td>
+                <img th:src="${product.proImage}" alt="${product.proName}" width="100"/>
+         
+            <td th:text="${product.proCategory}"></td>
+            <td th:text="${product.createdAt}"></td>
+            <td th:text="${product.createdBy}"></td>
+           <td>
+    <a th:href="@{/delete(proId=${product.proId})}" 
+       onclick="return confirm('Are you sure you want to delete this product?');" 
+       class="btn btn-danger btn-sm">Delete</a>
+</td>
+   <td>
+    <a th:href="@{/edit(proId=${product.proId})}">Edit</a>
+</td>
+            
+            
+            
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
